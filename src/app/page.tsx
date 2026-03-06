@@ -37,8 +37,21 @@ export default function LandingPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const contactFormRef = useRef<HTMLDivElement>(null);
 
-  const handleWaitlistSubmit = (formData: WaitlistFormData) => {
+  const handleWaitlistSubmit = async (formData: WaitlistFormData) => {
     try {
+      // Send to database via API
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
       setWaitlistData([...waitlistData, formData]);
       setFormStatus('success');
       setTimeout(() => setFormStatus('idle'), 3000);

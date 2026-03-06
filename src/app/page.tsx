@@ -55,7 +55,7 @@ export default function LandingPage() {
           description="Clearance automates IP protection for creators and agencies. Track licenses, get renewal reminders, and collect payments before your content goes dark."
           tag="Join 200+ creators protecting their IP"
           tagIcon={Shield}
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
           background={{ variant: "plain" }}
           kpis={[
             { value: "100%", label: "Automated Renewals" },
@@ -76,7 +76,7 @@ export default function LandingPage() {
           title="The IP Renewal Crisis Facing Creators"
           description="These are the problems keeping money on the table—and Clearance solves them all."
           tag="The Problem"
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
           textboxLayout="default"
           useInvertedBackground={false}
           animationType="slide-up"
@@ -100,7 +100,7 @@ export default function LandingPage() {
           description="Three simple steps to never lose renewal revenue again."
           tag="Automation"
           tagIcon={Zap}
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
           textboxLayout="default"
           useInvertedBackground={false}
           animationType="slide-up"
@@ -111,8 +111,7 @@ export default function LandingPage() {
                 { label: "Import licenses", detail: "Sync with Dropbox or manual upload" },
                 { label: "Set details", detail: "Price, duration, and brand info" },
                 { label: "Activate", detail: "Start tracking immediately" }
-              ],
-              completedLabel: "Setup Complete"
+              ],              completedLabel: "Setup Complete"
             },
             {
               title: "License Timer Runs",              description: "Real-time countdown to expiration with notifications",              bentoComponent: "animated-bar-chart"
@@ -134,7 +133,7 @@ export default function LandingPage() {
           description="Built for creators and agencies who need protection and peace of mind."
           tag="Platform"
           tagIcon={Sparkles}
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
           textboxLayout="default"
           useInvertedBackground={false}
           animationType="slide-up"
@@ -167,7 +166,7 @@ export default function LandingPage() {
           description="Creators, agencies, and platforms rely on Clearance"
           tag="Partners"
           tagIcon={Users}
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
           textboxLayout="default"
           useInvertedBackground={false}
           names={["Creator Studio", "Digital Collective", "Content Agency Pro", "IP Protection Labs", "Revenue Shield", "Creator Finance", "Deal Tracker Hub"]}
@@ -183,7 +182,7 @@ export default function LandingPage() {
           description="Get answers to common questions about Clearance and how it protects your IP revenue."
           tag="Help"
           tagIcon={HelpCircle}
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
           textboxLayout="default"
           useInvertedBackground={false}
           faqsAnimation="slide-up"
@@ -225,7 +224,7 @@ export default function LandingPage() {
           inputPlaceholder="Enter your email"
           buttonText="Join Waitlist"
           termsText="We respect your privacy. Unsubscribe anytime. No spam, ever."
-          tagAnimation="entrance-slide"
+          tagAnimation="blur-reveal"
         />
       </div>
 

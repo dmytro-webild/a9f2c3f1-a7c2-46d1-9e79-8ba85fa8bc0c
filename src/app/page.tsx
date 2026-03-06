@@ -10,7 +10,7 @@ import SocialProofOne from '@/components/sections/socialProof/SocialProofOne';
 import FaqBase from '@/components/sections/faq/FaqBase';
 import FooterSimple from '@/components/sections/footer/FooterSimple';
 import { Shield, Zap, Clock, AlertCircle, CheckCircle, Users, Sparkles, HelpCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Input from '@/components/form/Input';
 
 const navItems = [
@@ -35,6 +35,7 @@ interface WaitlistFormData {
 export default function LandingPage() {
   const [waitlistData, setWaitlistData] = useState<WaitlistFormData[]>([]);
   const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const contactFormRef = useRef<HTMLDivElement>(null);
 
   const handleWaitlistSubmit = (formData: WaitlistFormData) => {
     try {
@@ -45,6 +46,19 @@ export default function LandingPage() {
     } catch (error) {
       setFormStatus('error');
       console.error('Error submitting waitlist form:', error);
+    }
+  };
+
+  const handleJoinWaitlistClick = () => {
+    if (contactFormRef.current) {
+      contactFormRef.current.scrollIntoView({ behavior: 'smooth' });
+      // Focus on the email input after scroll
+      setTimeout(() => {
+        const emailInput = contactFormRef.current?.querySelector('input[type="email"]') as HTMLInputElement;
+        if (emailInput) {
+          emailInput.focus();
+        }
+      }, 300);
     }
   };
 
@@ -66,7 +80,7 @@ export default function LandingPage() {
           brandName="Clearance"
           navItems={navItems}
           button={{
-            text: "Join Waitlist",            href: "#contact"
+            text: "Join Waitlist",            onClick: handleJoinWaitlistClick
           }}
         />
       </div>
@@ -85,7 +99,7 @@ export default function LandingPage() {
             { value: "5min", label: "Setup Time" }
           ]}
           enableKpiAnimation={true}
-          buttons={[{ text: "Join Waitlist", href: "#contact" }]}
+          buttons={[{ text: "Join Waitlist", onClick: handleJoinWaitlistClick }]}
           imageSrc={heroImage}
           imageAlt="Clearance fintech dashboard interface"
           mediaAnimation="slide-up"
@@ -233,7 +247,7 @@ export default function LandingPage() {
         />
       </div>
 
-      <div id="contact" data-section="contact">
+      <div id="contact" data-section="contact" ref={contactFormRef}>
         <WaitlistFormSection onSubmit={handleWaitlistSubmit} formStatus={formStatus} />
       </div>
 

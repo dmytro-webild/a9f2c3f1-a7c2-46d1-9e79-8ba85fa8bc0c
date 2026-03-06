@@ -111,7 +111,8 @@ export default function LandingPage() {
                 { label: "Import licenses", detail: "Sync with Dropbox or manual upload" },
                 { label: "Set details", detail: "Price, duration, and brand info" },
                 { label: "Activate", detail: "Start tracking immediately" }
-              ],              completedLabel: "Setup Complete"
+              ],
+              completedLabel: "Setup Complete"
             },
             {
               title: "License Timer Runs",              description: "Real-time countdown to expiration with notifications",              bentoComponent: "animated-bar-chart"

@@ -52,7 +52,7 @@ export default function LandingPage() {
       <div id="hero" data-section="hero">
         <HeroSplitKpi
           title="Stop Losing Money When Your Content License Expires"
-          description="Clearance automates IP protection for creators and agencies. Track licenses, get renewal reminders, and collect payments before your content goes dark."
+          description="Recover $1,000–$5,000+ per renewal on autopilot. Clearance automates IP protection for creators and agencies. Track licenses, get renewal reminders, and collect payments before your content goes dark."
           tag="Join 200+ creators protecting their IP"
           tagIcon={Shield}
           tagAnimation="blur-reveal"

@@ -316,13 +316,13 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="bg-card rounded-lg p-8 shadow-sm">
           <div className="mb-8">
-            <h2 className="text-3xl font-bold mb-2">Get Early Access</h2>
-            <p className="text-foreground/70">Join the waitlist and be among the first to protect your IP revenue. Early adopters get lifetime discounts and 1-on-1 onboarding.</p>
+            <h2 className="text-3xl font-bold mb-2 break-words overflow-hidden text-ellipsis">Get Early Access</h2>
+            <p className="text-foreground/70 break-words overflow-hidden text-ellipsis">Join the waitlist and be among the first to protect your IP revenue. Early adopters get lifetime discounts and 1-on-1 onboarding.</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium mb-2">
+              <label htmlFor="email" className="block text-sm font-medium mb-2 break-words overflow-hidden text-ellipsis">
                 Email Address <span className="text-primary-cta">*</span>
               </label>
               <Input
@@ -335,7 +335,7 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
             </div>
 
             <div>
-              <label htmlFor="instagram" className="block text-sm font-medium mb-2">
+              <label htmlFor="instagram" className="block text-sm font-medium mb-2 break-words overflow-hidden text-ellipsis">
                 Instagram Handle <span className="text-foreground/50">(optional)</span>
               </label>
               <Input
@@ -347,7 +347,7 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
             </div>
 
             <div>
-              <label htmlFor="tiktok" className="block text-sm font-medium mb-2">
+              <label htmlFor="tiktok" className="block text-sm font-medium mb-2 break-words overflow-hidden text-ellipsis">
                 TikTok Handle <span className="text-foreground/50">(optional)</span>
               </label>
               <Input
@@ -368,18 +368,18 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
           </form>
 
           {formStatus === 'success' && (
-            <div className="mt-4 p-4 bg-green-100/20 border border-green-500/30 rounded-lg text-green-700 text-sm">
+            <div className="mt-4 p-4 bg-green-100/20 border border-green-500/30 rounded-lg text-green-700 text-sm break-words overflow-hidden text-ellipsis">
               ✓ Successfully joined the waitlist! Check your email for confirmation.
             </div>
           )}
 
           {formStatus === 'error' && (
-            <div className="mt-4 p-4 bg-red-100/20 border border-red-500/30 rounded-lg text-red-700 text-sm">
+            <div className="mt-4 p-4 bg-red-100/20 border border-red-500/30 rounded-lg text-red-700 text-sm break-words overflow-hidden text-ellipsis">
               × Something went wrong. Please try again.
             </div>
           )}
 
-          <p className="mt-6 text-xs text-foreground/50 text-center">
+          <p className="mt-6 text-xs text-foreground/50 text-center break-words overflow-hidden text-ellipsis">
             We respect your privacy. Unsubscribe anytime. No spam, ever.
           </p>
         </div>

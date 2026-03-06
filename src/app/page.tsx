@@ -118,13 +118,13 @@ export default function LandingPage() {
           animationType="slide-up"
           metrics={[
             {
-              id: "1",              value: "Brands",              title: "Run Your Content Past Expiry",              items: ["No expiration tracking", "Licenses silently expire", "Brands keep profiting—you don't"]
+              id: "1",              value: "Brands Use Expired Licenses",              title: "Content Keeps Running Past Expiry",              items: ["No expiration tracking", "Licenses silently expire", "Brands keep profiting—you don't"]
             },
             {
-              id: "2",              value: "You Never",              title: "Invoice the Renewal",              items: ["Manual renewal follow-ups", "Easy to forget", "Lost revenue disappears"]
+              id: "2",              value: "You Miss Renewal Invoices",              title: "Nobody Remembers to Bill",              items: ["Manual renewal follow-ups", "Easy to forget", "Lost revenue disappears"]
             },
             {
-              id: "3",              value: "That's Money",              title: "You'll Never See",              items: ["Average loss: $1,200/creator", "Expires quarterly", "Compounds over time"]
+              id: "3",              value: "Revenue Slips Away Silently",              title: "Money Lost to Expired Deals",              items: ["Average loss: $1,200/creator", "Expires quarterly", "Compounds over time"]
             }
           ]}
         />

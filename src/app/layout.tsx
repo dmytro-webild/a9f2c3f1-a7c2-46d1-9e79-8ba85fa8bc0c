@@ -1,49 +1,20 @@
 import type { Metadata } from "next";
-import { Halant } from "next/font/google";
 import { Inter } from "next/font/google";
-import { Figtree } from "next/font/google";
 import "./globals.css";
-import { ServiceWrapper } from "@/components/ServiceWrapper";
-import Tag from "@/tag/Tag";
 
-const halant = Halant({
-  variable: "--font-halant",  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const inter = Inter({
-  variable: "--font-inter",  subsets: ["latin"],
-});
-
-const figtree = Figtree({
-  variable: "--font-figtree",  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clearance – Protect Your Content License Revenue",  description: "Stop losing money when your content licenses expire. Clearance automates IP protection for creators and agencies with smart license tracking and renewal invoicing.",  keywords: "content license protection, IP management, creator revenue, license tracker, renewal automation",  openGraph: {
-    title: "Clearance – Protect Your Content License Revenue",    description: "Stop losing money when your content licenses expire. Clearance automates IP protection for creators and agencies.",    siteName: "Clearance",    type: "website"},
-  twitter: {
-    card: "summary_large_image",    title: "Clearance – Protect Your Content License Revenue",    description: "Automate IP protection and renewal invoicing for creators and agencies."},
-  robots: {
-    index: true,
-    follow: true,
-  },
-};
+  title: "Clearance - Protect Your IP Revenue",  description: "Automate IP protection for creators and agencies. Track licenses, get renewal reminders, and collect payments before your content goes dark."};
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <ServiceWrapper>
-        <body
-          className={`${halant.variable} ${inter.variable} ${figtree.variable} antialiased`}
-        >
-          <Tag />
-          {children}
-        
+    <html lang="en">
+      <body className={inter.className}>{children}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -1411,7 +1382,6 @@ export default function RootLayout({
           }}
         />
       </body>
-      </ServiceWrapper>
     </html>
   );
 }

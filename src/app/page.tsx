@@ -8,10 +8,10 @@ import FeatureBento from '@/components/sections/feature/FeatureBento';
 import ProductCardFour from '@/components/sections/product/ProductCardFour';
 import SocialProofOne from '@/components/sections/socialProof/SocialProofOne';
 import FaqBase from '@/components/sections/faq/FaqBase';
-import ContactSplit from '@/components/sections/contact/ContactSplit';
 import FooterSimple from '@/components/sections/footer/FooterSimple';
 import { Shield, Zap, Clock, AlertCircle, CheckCircle, Users, Sparkles, HelpCircle } from "lucide-react";
 import { useState } from "react";
+import Input from '@/components/form/Input';
 
 const navItems = [
   { name: "Problem", id: "problem" },
@@ -311,14 +311,12 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
               <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email Address <span className="text-primary-cta">*</span>
               </label>
-              <input
-                type="email"
-                id="email"
+              <Input
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={setEmail}
+                type="email"
                 placeholder="your@email.com"
                 required
-                className="w-full px-4 py-2 rounded-lg border border-accent/30 bg-background text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary-cta focus:ring-1 focus:ring-primary-cta"
               />
             </div>
 
@@ -326,13 +324,11 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
               <label htmlFor="instagram" className="block text-sm font-medium mb-2">
                 Instagram Handle <span className="text-foreground/50">(optional)</span>
               </label>
-              <input
-                type="text"
-                id="instagram"
+              <Input
                 value={instagram}
-                onChange={(e) => setInstagram(e.target.value)}
+                onChange={setInstagram}
+                type="text"
                 placeholder="@yourhandle"
-                className="w-full px-4 py-2 rounded-lg border border-accent/30 bg-background text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary-cta focus:ring-1 focus:ring-primary-cta"
               />
             </div>
 
@@ -340,13 +336,11 @@ function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: Waitli
               <label htmlFor="tiktok" className="block text-sm font-medium mb-2">
                 TikTok Handle <span className="text-foreground/50">(optional)</span>
               </label>
-              <input
-                type="text"
-                id="tiktok"
+              <Input
                 value={tiktok}
-                onChange={(e) => setTiktok(e.target.value)}
+                onChange={setTiktok}
+                type="text"
                 placeholder="@yourhandle"
-                className="w-full px-4 py-2 rounded-lg border border-accent/30 bg-background text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary-cta focus:ring-1 focus:ring-primary-cta"
               />
             </div>
 

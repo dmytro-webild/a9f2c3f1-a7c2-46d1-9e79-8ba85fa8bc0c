@@ -11,6 +11,7 @@ import FaqBase from '@/components/sections/faq/FaqBase';
 import ContactSplit from '@/components/sections/contact/ContactSplit';
 import FooterSimple from '@/components/sections/footer/FooterSimple';
 import { Shield, Zap, Clock, AlertCircle, CheckCircle, Users, Sparkles, HelpCircle } from "lucide-react";
+import { useState } from "react";
 
 const navItems = [
   { name: "Problem", id: "problem" },
@@ -25,7 +26,28 @@ const socialProofLogos = [
   "http://img.b2bpic.net/free-vector/flat-minimal-technology-labels_23-2149083696.jpg",  "http://img.b2bpic.net/free-vector/hand-drawn-hub-logo-design_23-2149857667.jpg",  "http://img.b2bpic.net/free-vector/gradient-accounting-logo_23-2148844138.jpg",  "http://img.b2bpic.net/free-vector/design-artwork-logo-template_23-2149507369.jpg",  "http://img.b2bpic.net/free-vector/gradient-colored-data-logo-template_23-2149189483.jpg",  "http://img.b2bpic.net/free-vector/hand-drawn-hub-logo-design_23-2149857670.jpg",  "http://img.b2bpic.net/free-vector/hand-drawn-business-workshop-labels_23-2149422820.jpg"
 ];
 
+interface WaitlistFormData {
+  email: string;
+  instagram?: string;
+  tiktok?: string;
+}
+
 export default function LandingPage() {
+  const [waitlistData, setWaitlistData] = useState<WaitlistFormData[]>([]);
+  const [formStatus, setFormStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  const handleWaitlistSubmit = (formData: WaitlistFormData) => {
+    try {
+      setWaitlistData([...waitlistData, formData]);
+      setFormStatus('success');
+      setTimeout(() => setFormStatus('idle'), 3000);
+      console.log('Waitlist submission:', formData);
+    } catch (error) {
+      setFormStatus('error');
+      console.error('Error submitting waitlist form:', error);
+    }
+  };
+
   return (
     <ThemeProvider
       defaultButtonVariant="text-stagger"
@@ -212,21 +234,7 @@ export default function LandingPage() {
       </div>
 
       <div id="contact" data-section="contact">
-        <ContactSplit
-          tag="Waitlist"
-          title="Get Early Access"
-          description="Join the waitlist and be among the first to protect your IP revenue. Early adopters get lifetime discounts and 1-on-1 onboarding."
-          background={{ variant: "plain" }}
-          useInvertedBackground={false}
-          imageSrc={heroImage}
-          imageAlt="Clearance waitlist early access"
-          mediaAnimation="slide-up"
-          mediaPosition="right"
-          inputPlaceholder="Enter your email"
-          buttonText="Join Waitlist"
-          termsText="We respect your privacy. Unsubscribe anytime. No spam, ever."
-          tagAnimation="blur-reveal"
-        />
+        <WaitlistFormSection onSubmit={handleWaitlistSubmit} formStatus={formStatus} />
       </div>
 
       <div id="footer" data-section="footer">
@@ -259,5 +267,115 @@ export default function LandingPage() {
         />
       </div>
     </ThemeProvider>
+  );
+}
+
+function WaitlistFormSection({ onSubmit, formStatus }: { onSubmit: (data: WaitlistFormData) => void; formStatus: 'idle' | 'success' | 'error' }) {
+  const [email, setEmail] = useState('');
+  const [instagram, setInstagram] = useState('');
+  const [tiktok, setTiktok] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    if (!email) {
+      setIsSubmitting(false);
+      return;
+    }
+
+    onSubmit({
+      email,
+      instagram: instagram || undefined,
+      tiktok: tiktok || undefined
+    });
+
+    setEmail('');
+    setInstagram('');
+    setTiktok('');
+    setIsSubmitting(false);
+  };
+
+  return (
+    <div className="w-full">
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="bg-card rounded-lg p-8 shadow-sm">
+          <div className="mb-8">
+            <h2 className="text-3xl font-bold mb-2">Get Early Access</h2>
+            <p className="text-foreground/70">Join the waitlist and be among the first to protect your IP revenue. Early adopters get lifetime discounts and 1-on-1 onboarding.</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium mb-2">
+                Email Address <span className="text-primary-cta">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your@email.com"
+                required
+                className="w-full px-4 py-2 rounded-lg border border-accent/30 bg-background text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary-cta focus:ring-1 focus:ring-primary-cta"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="instagram" className="block text-sm font-medium mb-2">
+                Instagram Handle <span className="text-foreground/50">(optional)</span>
+              </label>
+              <input
+                type="text"
+                id="instagram"
+                value={instagram}
+                onChange={(e) => setInstagram(e.target.value)}
+                placeholder="@yourhandle"
+                className="w-full px-4 py-2 rounded-lg border border-accent/30 bg-background text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary-cta focus:ring-1 focus:ring-primary-cta"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="tiktok" className="block text-sm font-medium mb-2">
+                TikTok Handle <span className="text-foreground/50">(optional)</span>
+              </label>
+              <input
+                type="text"
+                id="tiktok"
+                value={tiktok}
+                onChange={(e) => setTiktok(e.target.value)}
+                placeholder="@yourhandle"
+                className="w-full px-4 py-2 rounded-lg border border-accent/30 bg-background text-foreground placeholder-foreground/50 focus:outline-none focus:border-primary-cta focus:ring-1 focus:ring-primary-cta"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={isSubmitting || !email}
+              className="w-full px-6 py-3 rounded-lg bg-primary-cta text-primary-cta-text font-medium hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity"
+            >
+              {isSubmitting ? 'Joining...' : 'Join Waitlist'}
+            </button>
+          </form>
+
+          {formStatus === 'success' && (
+            <div className="mt-4 p-4 bg-green-100/20 border border-green-500/30 rounded-lg text-green-700 text-sm">
+              ✓ Successfully joined the waitlist! Check your email for confirmation.
+            </div>
+          )}
+
+          {formStatus === 'error' && (
+            <div className="mt-4 p-4 bg-red-100/20 border border-red-500/30 rounded-lg text-red-700 text-sm">
+              × Something went wrong. Please try again.
+            </div>
+          )}
+
+          <p className="mt-6 text-xs text-foreground/50 text-center">
+            We respect your privacy. Unsubscribe anytime. No spam, ever.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }

@@ -1,7 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+interface WaitlistEntry {
+  email: string;
+  instagram?: string;
+  tiktok?: string;
+  createdAt: string;
+}
+
+// In-memory storage for demonstration
+// In production, replace with actual database (MongoDB, PostgreSQL, etc.)
+const waitlistEntries: WaitlistEntry[] = [];
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,61 +17,70 @@ export async function POST(request: NextRequest) {
     const { email, instagram, tiktok } = body;
 
     // Validate email
-    if (!email || !email.includes('@')) {
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json(
-        { error: 'Invalid email address' },
+        { error: 'Valid email is required' },
         { status: 400 }
       );
     }
 
-    // Check if Supabase credentials are configured
-    if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-      console.error('Supabase credentials not configured');
-      // Still return success to user, but log the error
+    // Check for duplicate email
+    if (waitlistEntries.some(entry => entry.email === email)) {
       return NextResponse.json(
-        { message: 'Submission received (database pending)' },
-        { status: 202 }
+        { error: 'Email already registered' },
+        { status: 409 }
       );
     }
 
-    // Insert into Supabase
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
-      },
-      body: JSON.stringify({
-        email,
-        instagram: instagram || null,
-        tiktok: tiktok || null,
-        created_at: new Date().toISOString(),
-      }),
-    });
+    // Create waitlist entry
+    const entry: WaitlistEntry = {
+      email,
+      instagram: instagram || undefined,
+      tiktok: tiktok || undefined,
+      createdAt: new Date().toISOString()
+    };
 
-    if (!response.ok) {
-      console.error('Supabase error:', await response.text());
-      // Check if it's a duplicate entry error
-      const errorText = await response.text();
-      if (errorText.includes('duplicate') || errorText.includes('unique')) {
-        return NextResponse.json(
-          { error: 'This email is already on the waitlist' },
-          { status: 409 }
-        );
-      }
-      throw new Error(`Supabase error: ${response.status}`);
-    }
+    // Add to in-memory storage
+    waitlistEntries.push(entry);
+
+    // TODO: In production, save to database here
+    // Example for MongoDB:
+    // await db.collection('waitlist').insertOne(entry);
+    
+    // TODO: Send confirmation email
+    // Example:
+    // await sendEmail({
+    //   to: email,
+    //   subject: 'Welcome to Clearance Waitlist',
+    //   template: 'waitlist-confirmation'
+    // });
+
+    console.log('Waitlist entry created:', entry);
 
     return NextResponse.json(
-      { message: 'Successfully joined the waitlist' },
+      {
+        success: true,
+        message: 'Successfully joined the waitlist',
+        data: entry
+      },
       { status: 201 }
     );
   } catch (error) {
     console.error('Waitlist API error:', error);
     return NextResponse.json(
-      { error: 'Failed to process waitlist submission' },
+      { error: 'Internal server error' },
       { status: 500 }
     );
   }
+}
+
+export async function GET() {
+  // Optional: Get all waitlist entries (add authentication in production)
+  return NextResponse.json(
+    {
+      count: waitlistEntries.length,
+      entries: waitlistEntries
+    },
+    { status: 200 }
+  );
 }

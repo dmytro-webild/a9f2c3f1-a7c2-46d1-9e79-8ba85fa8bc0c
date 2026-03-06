@@ -39,7 +39,6 @@ export default function LandingPage() {
 
   const handleWaitlistSubmit = async (formData: WaitlistFormData) => {
     try {
-      // Send to database via API
       const response = await fetch('/api/waitlist', {
         method: 'POST',
         headers: {
@@ -49,13 +48,15 @@ export default function LandingPage() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to submit form');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to submit form');
       }
 
+      const responseData = await response.json();
       setWaitlistData([...waitlistData, formData]);
       setFormStatus('success');
       setTimeout(() => setFormStatus('idle'), 3000);
-      console.log('Waitlist submission:', formData);
+      console.log('Waitlist submission successful:', responseData);
     } catch (error) {
       setFormStatus('error');
       console.error('Error submitting waitlist form:', error);
@@ -65,7 +66,6 @@ export default function LandingPage() {
   const handleJoinWaitlistClick = () => {
     if (contactFormRef.current) {
       contactFormRef.current.scrollIntoView({ behavior: 'smooth' });
-      // Focus on the email input after scroll
       setTimeout(() => {
         const emailInput = contactFormRef.current?.querySelector('input[type="email"]') as HTMLInputElement;
         if (emailInput) {

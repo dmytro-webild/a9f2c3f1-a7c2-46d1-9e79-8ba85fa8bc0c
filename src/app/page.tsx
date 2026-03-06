@@ -141,19 +141,19 @@ export default function LandingPage() {
           carouselMode="buttons"
           products={[
             {
-              id: "1",              name: "Licensing Tracker",              price: "Core Feature",              variant: "Dashboard view of all active licenses",              imageSrc: heroImage,
+              id: "1",              name: "Licensing Tracker",              price: "Core Feature",              variant: "Never miss a renewal deadline again",              imageSrc: heroImage,
               imageAlt: "Licensing tracker dashboard"
             },
             {
-              id: "2",              name: "Automated Renewal Invoicing",              price: "Core Feature",              variant: "Smart billing 30 days before expiry",              imageSrc: heroImage,
+              id: "2",              name: "Automated Renewal Invoicing",              price: "Core Feature",              variant: "Get paid automatically before licenses expire",              imageSrc: heroImage,
               imageAlt: "Automated invoicing interface"
             },
             {
-              id: "3",              name: "Payment Protection",              price: "Core Feature",              variant: "Secure payment collection and tracking",              imageSrc: heroImage,
+              id: "3",              name: "Payment Protection",              price: "Core Feature",              variant: "Ensure every license renewal turns into revenue",              imageSrc: heroImage,
               imageAlt: "Payment security interface"
             },
             {
-              id: "4",              name: "Creator Dashboard",              price: "Core Feature",              variant: "Full analytics and revenue insights",              imageSrc: heroImage,
+              id: "4",              name: "Creator Dashboard",              price: "Core Feature",              variant: "Track all your IP revenue in one place",              imageSrc: heroImage,
               imageAlt: "Creator dashboard analytics"
             }
           ]}

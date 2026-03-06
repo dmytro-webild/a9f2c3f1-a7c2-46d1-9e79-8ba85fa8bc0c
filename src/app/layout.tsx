@@ -5,7 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Clearance - Protect Your IP Revenue",  description: "Automate IP protection for creators and agencies. Track licenses, get renewal reminders, and collect payments before your content goes dark."};
+  title: "Clearance - Protect Your IP Revenue",  description: "Automate IP protection for creators and agencies. Track licenses, get renewal reminders, and collect payments before your content goes dark."
+};
 
 export default function RootLayout({
   children,
